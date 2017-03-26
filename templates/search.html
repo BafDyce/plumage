@@ -9,13 +9,13 @@
 {% endblock head_description %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/tipuesearch.css"/>
+  <link rel="stylesheet" href="{{ main_siteurl }}/theme/css/tipuesearch.css"/>
 {% endblock %}
 
 {% block extra_js %}
-  <script src="{{ SITEURL }}/theme/js/tipuesearch_content.js"></script>
-  <script src="{{ SITEURL }}/theme/js/tipuesearch_set.js"></script>
-  <script src="{{ SITEURL }}/theme/js/tipuesearch.min.js"></script>
+  <script src="{{ main_siteurl }}/theme/js/tipuesearch_content.js"></script>
+  <script src="{{ main_siteurl }}/theme/js/tipuesearch_set.js"></script>
+  <script src="{{ main_siteurl }}/theme/js/tipuesearch.min.js"></script>
 
   <script>
     $(document).ready(function() {
@@ -23,7 +23,7 @@
           'mode' : 'json',
           'show': 10,
           'newWindow': false,
-          'contentLocation': '{{ SITEURL }}/tipuesearch_content.json'
+          'contentLocation': '{{ main_siteurl }}/tipuesearch_content.json'
       });
     });
   </script>

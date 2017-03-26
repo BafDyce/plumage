@@ -8,7 +8,7 @@
 
 {% block top_center %}
   <h1>
-    <a href="{{ SITEURL }}/{{ ARCHIVES_SAVE_AS }}" rel="bookmark" title="Permalink to archives">Archives</a>
+    <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ ARCHIVES_SAVE_AS }}" rel="bookmark" title="Permalink to archives">Archives</a>
   </h1>
 {% endblock %}
 
@@ -51,7 +51,7 @@
                 {% endif %}
 
                 <dt><abbr class="published" title="{{ article.date.isoformat() }}">{{ article.date.strftime('%b. %d') }}</abbr></dt>
-                <dd><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
+                <dd><a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ article.url }}">{{ article.title }}</a></dd>
 
                 {% if loop.last %}
                   </dl>

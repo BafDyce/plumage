@@ -8,7 +8,7 @@
 
 {% block top_center %}
   <h1>
-      <a href="{{ SITEURL }}/{{ AUTHORS_SAVE_AS }}" rel="bookmark" title="Permalink to author list">Authors</a>
+      <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ AUTHORS_SAVE_AS }}" rel="bookmark" title="Permalink to author list">Authors</a>
   </h1>
 {% endblock %}
 
@@ -22,8 +22,8 @@
 
   <dl class="dl-horizontal">
     {% for author in all_authors|sort(reverse = True, attribute = 'articles') %}
-      <dt><a href="{{ SITEURL }}/{{ author.url }}" class="label label-info">{{ author.name }}</a></dt>
-      <dd><a href="{{ SITEURL }}/{{ author.url }}">{{ author.articles }} article{{ 's' if author.articles > 1 else '' }}</a></dd>
+      <dt><a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ author.url }}" class="label label-info">{{ author.name }}</a></dt>
+      <dd><a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ author.url }}">{{ author.articles }} article{{ 's' if author.articles > 1 else '' }}</a></dd>
     {% endfor %}
   </dl>
 

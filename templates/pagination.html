@@ -4,7 +4,7 @@
       {% if articles_page.has_previous() %}
         {% set num = articles_page.previous_page_number() %}
         <li>
-          <a href="{{ SITEURL }}/{{ page_name }}{{ num if num > 1 else '' }}.html"
+          <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ page_name }}{{ num if num > 1 else '' }}.html"
               aria-label="Previous" rel="prev">
             <span aria-hidden="true">&larr;</span>
           </a>
@@ -25,7 +25,7 @@
         {% if num in linked_pages %}
           {% set is_current_page = (num == articles_page.number) -%}
           <li class="{{ 'active' if is_current_page else '' }}">
-            <a href="{{ SITEURL }}/{{ page_name }}{{ num if num > 1 else ''}}.html"
+            <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ page_name }}{{ num if num > 1 else ''}}.html"
               rel="
                 {% if num == 1 %} first {% endif %}
                 {% if num == articles_paginator.num_pages %} last {% endif %}
@@ -44,7 +44,7 @@
 
       {% if articles_page.has_next() %}
         <li>
-          <a href="{{ SITEURL }}/{{ page_name }}{{ articles_page.next_page_number() }}.html"
+          <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ page_name }}{{ articles_page.next_page_number() }}.html"
               aria-label="Next" rel="next">
             <span aria-hidden="true">&rarr;</span>
           </a>

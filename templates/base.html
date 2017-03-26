@@ -11,31 +11,31 @@
     <meta name="author" content="{{ AUTHOR|e }}"/>
 
     <!-- custom css -->
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/my.css"/>
+    <link rel="stylesheet" href="{{ main_siteurl }}/theme/css/my.css"/>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/magnific-popup.min.css"/>
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/jquery.mglass.css"/>
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/pygment-solarized-dark.css"/>
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css"/>
+    <link rel="stylesheet" href="{{ main_siteurl }}/theme/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{ main_siteurl }}/theme/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="{{ main_siteurl }}/theme/css/magnific-popup.min.css"/>
+    <link rel="stylesheet" href="{{ main_siteurl }}/theme/css/jquery.mglass.css"/>
+    <link rel="stylesheet" href="{{ main_siteurl }}/theme/css/pygment-solarized-dark.css"/>
+    <link rel="stylesheet" href="{{ main_siteurl }}/theme/css/style.css"/>
     {% if FLAT_DESIGN is defined and not FLAT_DESIGN %}
-      <link rel="stylesheet" href="{{ SITEURL }}/theme/css/bootstrap-theme.min.css"/>
+      <link rel="stylesheet" href="{{ main_siteurl }}/theme/css/bootstrap-theme.min.css"/>
     {% endif %}
 
     <!-- Fonts -->
-    <link href='{{ SITEURL }}/theme/fonts/open-sans.css' rel='stylesheet' type='text/css'/>
-    <link href='{{ SITEURL }}/theme/fonts/istok-web.css' rel='stylesheet' type='text/css'/>
-    <link href='{{ SITEURL }}/theme/fonts/droid-sans-mono.css' rel='stylesheet' type='text/css'/>
+    <link href='{{ main_siteurl }}/theme/fonts/open-sans.css' rel='stylesheet' type='text/css'/>
+    <link href='{{ main_siteurl }}/theme/fonts/istok-web.css' rel='stylesheet' type='text/css'/>
+    <link href='{{ main_siteurl }}/theme/fonts/droid-sans-mono.css' rel='stylesheet' type='text/css'/>
     {% if TYPOGRIFY %}
-      <link href='{{ SITEURL }}/theme/fonts/expletus-sans.css' rel='stylesheet' type='text/css'>
+      <link href='{{ main_siteurl }}/theme/fonts/expletus-sans.css' rel='stylesheet' type='text/css'>
     {% endif %}
 
     {% block extra_css %}{% endblock %}
 
-    <link rel="icon" href="{{ SITEURL }}/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ SITEURL }}/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ main_siteurl }}/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ main_siteurl }}/favicon.ico" type="image/x-icon">
 
     <!-- Feeds -->
     {% set all_feeds = [] %}
@@ -78,7 +78,7 @@
 
       <div class="page-header">
         {% if SITE_THUMBNAIL %}
-          <a href="{{ SITEURL }}" class="avatar-container pull-left">
+          <a href="{{ main_siteurl }}" class="avatar-container pull-left">
             <div class="avatar {% if SITE_THUMBNAIL_TEXT %} animate {% endif %}">
               <div class="side"><img src="{{ SITE_THUMBNAIL }}" class="img-responsive"/></div>
               {% if SITE_THUMBNAIL_TEXT %}
@@ -88,11 +88,11 @@
           </a>
         {% endif %}
         {% if BANNER is defined %}
-        <a href="{{ SITEURL }}">
+        <a href="{{ main_siteurl }}">
           <img class="banner" alt="{{ SITENAME }}" text="{{ SITENAME }}" src="/{{ BANNER }}">
         </a>
         {% else %}
-        <h1><a href="{{ SITEURL }}">{{ SITENAME }}</a> <small>{{ SITESUBTITLE }}</small></h1>
+        <h1><a href="{{ main_siteurl }}">{{ SITENAME }}</a> <small>{{ SITESUBTITLE }}</small></h1>
         {% endif %}
       </div>
 
@@ -106,13 +106,23 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ SITEURL }}" title="{{ SITESUBTITLE|e }}">{{ SITENAME }}</a>
+          <a class="navbar-brand" href="{{ main_siteurl }}" title="{{ SITESUBTITLE|e }}">{{ SITENAME }}</a>
         </div>
 
         <!-- Menus and search forms -->
         <div class="collapse navbar-collapse" id="plumage-navbar-collapse-1">
 
           <ul class="nav navbar-nav">
+            <!-- language buttons -->
+            {% if lang_siteurls %}
+              {% for lang, siteurl in lang_siteurls.items() %}
+              <li{% if lang == DEFAULT_LANG %} class="active"{% endif %}><a href="{{ siteurl }}/">{{ lang | lookup_lang_name }}</a></li>
+              {% endfor %}
+              <!-- separator -->
+              <li style="background-color: white; padding: 5px;">&nbsp</li>
+            {% endif %}
+
+            <!-- static pages and tags -->
             {% for title, link in MENUITEMS %}
               {% set active_page = link == ("/%s"|format(output_file)).strip('index.html') -%}
               <li {% if active_page %} class="active" {% endif %}>
@@ -123,7 +133,7 @@
               {% for p in pages %}
                 {% set active_page = (p == page) -%}
                 <li {% if active_page %} class="active" {% endif %}>
-                  <a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}{% if active_page %} <span class="sr-only">(current)</span>{% endif %}</a>
+                  <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ p.url }}">{{ p.title }}{% if active_page %} <span class="sr-only">(current)</span>{% endif %}</a>
                 </li>
               {% endfor %}
             {% endif %}
@@ -131,7 +141,7 @@
               {% for c, null in categories %}
                 {% set active_category = (c == category) -%}
                 <li {% if active_category %} class="active" {% endif %}>
-                  <a href="{{ SITEURL }}/{{ c.url }}">{{ c.name }}{% if active_category %} <span class="sr-only">(current)</span>{% endif %}</a>
+                  <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ c.url }}">{{ c.name }}{% if active_category %} <span class="sr-only">(current)</span>{% endif %}</a>
                 </li>
               {% endfor %}
             {% endif %}
@@ -153,7 +163,7 @@
           {% endif %}
 
           {% if TIPUE_SEARCH %}
-            <form class="navbar-form navbar-right" role="search" action="{{ SITEURL }}/search.html" onsubmit="return validateForm(this.elements['q'].value);">
+            <form class="navbar-form navbar-right" role="search" action="{{ main_siteurl }}/search.html" onsubmit="return validateForm(this.elements['q'].value);">
               <div class="form-group">
                 <div class="input-group">
                   <input type="text" name="q" id="tipue_search_input" class="form-control search-query" placeholder="Search" required />
@@ -236,13 +246,13 @@
             <h5>Browse content by</h5>
             <ul class="list-unstyled">
               {% if CATEGORIES_SAVE_AS %}
-                <li><a href="{{ SITEURL }}/{{ CATEGORIES_SAVE_AS }}"><i class="fa fa-tags"></i> Categories</a></li>
+                <li><a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ CATEGORIES_SAVE_AS }}"><i class="fa fa-tags"></i> Categories</a></li>
               {% endif %}
               {% if ARCHIVES_SAVE_AS %}
-                <li><a href="{{ SITEURL }}/{{ ARCHIVES_SAVE_AS }}"><i class="fa fa-calendar"></i> Dates</a></li>
+                <li><a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ ARCHIVES_SAVE_AS }}"><i class="fa fa-calendar"></i> Dates</a></li>
               {% endif %}
               {% if TAGS_SAVE_AS %}
-                <li><a href="{{ SITEURL }}/{{ TAGS_SAVE_AS }}"><i class="fa fa-tag"></i> Tags</a></li>
+                <li><a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ TAGS_SAVE_AS }}"><i class="fa fa-tag"></i> Tags</a></li>
               {% endif %}
             </ul>
           </div>
@@ -285,18 +295,19 @@
       <div class="container">
         <div class="row col-md-12 text-muted text-center">
           Site generated by <a href="https://getpelican.com"> Pelican</a>.<br/>
-          <a href="https://github.com/kdeldycke/plumage"> Plumage</a> theme by <a href="https://kevin.deldycke.com">Kevin Deldycke</a>.
+          <a href="https://github.com/kdeldycke/plumage"> Plumage</a> theme by <a href="https://kevin.deldycke.com">Kevin Deldycke</a>, <br />
+          modified by <a href="{{ main_siteurl }}">Fabian Würfl</a>.
         </div>
       </div>
 
     </footer>
 
-    <script src="{{ SITEURL }}/theme/js/jquery.min.js"></script>
-    <script src="{{ SITEURL }}/theme/js/bootstrap.min.js"></script>
-    <script src="{{ SITEURL }}/theme/js/jquery.magnific-popup.min.js"></script>
-    <script src="{{ SITEURL }}/theme/js/jquery.fitvids.min.js"></script>
-    <script src="{{ SITEURL }}/theme/js/jquery.mglass.js"></script>
-    <script src="{{ SITEURL }}/theme/js/application.js"></script>
+    <script src="{{ main_siteurl }}/theme/js/jquery.min.js"></script>
+    <script src="{{ main_siteurl }}/theme/js/bootstrap.min.js"></script>
+    <script src="{{ main_siteurl }}/theme/js/jquery.magnific-popup.min.js"></script>
+    <script src="{{ main_siteurl }}/theme/js/jquery.fitvids.min.js"></script>
+    <script src="{{ main_siteurl }}/theme/js/jquery.mglass.js"></script>
+    <script src="{{ main_siteurl }}/theme/js/application.js"></script>
     {% block extra_js %}{% endblock %}
 
   </body>
