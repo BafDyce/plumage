@@ -10,6 +10,9 @@
 
     <meta name="author" content="{{ AUTHOR|e }}"/>
 
+    <!-- custom css -->
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/my.css"/>
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/font-awesome.min.css"/>
@@ -84,7 +87,13 @@
             </div>
           </a>
         {% endif %}
+        {% if BANNER is defined %}
+        <a href="{{ SITEURL }}">
+          <img class="banner" alt="{{ SITENAME }}" text="{{ SITENAME }}" src="{{ BANNER }}">
+        </a>
+        {% else %}
         <h1><a href="{{ SITEURL }}">{{ SITENAME }}</a> <small>{{ SITESUBTITLE }}</small></h1>
+        {% endif %}
       </div>
 
       <nav class="navbar navbar-default">
