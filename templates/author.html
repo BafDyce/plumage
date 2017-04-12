@@ -2,12 +2,12 @@
 
 
 {% block title %}
-  Articles by {{ author.name }}
+  {{ 'Articles' | lookup_translation(DEFAULT_LANG) }} {{ 'by' | lookup_translation(DEFAULT_LANG) }} {{ author.name }}
 {% endblock %}
 
 
 {% block top_center %}
   <h1>
-    <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ author.url }}" rel="bookmark" title="Permalink to {{ author.name|e }}'s articles">Articles by {{ author.name }}</a>
+    <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ author.url }}" rel="bookmark" title="Permalink to {{ author.name|e }}'s articles">{{ 'Articles' | lookup_translation(DEFAULT_LANG) }} {{ 'by' | lookup_translation(DEFAULT_LANG) }} {{ author.name }}</a>
   </h1>
 {% endblock %}

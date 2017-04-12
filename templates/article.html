@@ -9,7 +9,7 @@
 
 {% block top_center %}
   <h1>
-    <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags|e }}">{{ article.title }}</a>
+    <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ article.url }}" rel="bookmark" title="Permalink {{ 'to' | lookup_translation(DEFAULT_LANG) }} {{ article.title|striptags|e }}">{{ article.title }}</a>
   </h1>
 {% endblock %}
 
@@ -38,7 +38,7 @@
               {% set article_counter = articles|length() %}
               <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ article.category.url }}" rel="tag"
                   data-toggle="tooltip" class="label label-info"
-                  title="{{ article_counter }} article{{ 's' if article_counter > 1 else '' }} in this category">{{ article.category }}</a>
+                  title="{{ article_counter }} {{ ('article' 's' if article_counter > 1 else '') | lookup_translation(DEFAULT_LANG)}} {{ 'in this category' | lookup_translation(DEFAULT_LANG) }}">{{ article.category }}</a>
             {% endif %}
           {% endfor %}
         {% endif %}
@@ -70,12 +70,12 @@
         <ul class="pager">
           <li class="previous {% if not article.prev_article %} disabled {% endif %}">
             <a {% if article.prev_article %} href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ article.prev_article.url }}" title="{{ article.prev_article.title|striptags|e }}" {% endif %} rel="prev">
-              <span aria-hidden="true">←</span> Older
+              <span aria-hidden="true">←</span> {{ 'Older' | lookup_translation(DEFAULT_LANG) }}
             </a>
           </li>
           <li class="next {% if not article.next_article %} disabled {% endif %}">
             <a {% if article.next_article %} href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ article.next_article.url }}" title="{{ article.next_article.title|striptags|e }}" {% endif %} rel="next">
-              Newer <span aria-hidden="true">→</span>
+              {{ 'Newer' | lookup_translation(DEFAULT_LANG) }} <span aria-hidden="true">→</span>
             </a>
           </li>
         </ul>
@@ -95,7 +95,7 @@
   </div>
 
   {% if article.related_posts %}
-    <h3>Related content</h3>
+    <h3>{{ 'Related content' | lookup_translation(DEFAULT_LANG) }}</h3>
     <!-- TODO: Use fancier related layout, as in https://kevin.deldycke.com/2012/04/beautify-contextual-related-posts-wordpress-plugin/ -->
     <ul>
       {% for related_post in article.related_posts %}

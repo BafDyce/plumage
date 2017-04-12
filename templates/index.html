@@ -4,7 +4,7 @@
 {% block content %}
 
   {% block content_title %}
-    <h2>Articles</h2>
+    <h2>{{ 'Articles' | lookup_translation(DEFAULT_LANG) }}</h2>
   {% endblock %}
 
   {% for article in articles_page.object_list %}
@@ -13,7 +13,7 @@
         <h2><a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags|e }}">{{ article.title }}</a></h2>
       </header>
       <div>{{ article.summary }}</div>
-      <div><a class="btn btn-primary" href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ article.url }}"><strong>➟ Read more</strong></a></div>
+      <div><a class="btn btn-primary" href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ article.url }}"><strong>➟ {{ 'Read more' | lookup_translation(DEFAULT_LANG)}}</strong></a></div>
     </article>
     <hr/>
   {% endfor %}

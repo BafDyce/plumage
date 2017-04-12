@@ -2,13 +2,13 @@
 
 
 {% block title %}
-  Archives
+  {{ 'Archives' | lookup_translation(DEFAULT_LANG) }}
 {% endblock %}
 
 
 {% block top_center %}
   <h1>
-    <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ ARCHIVES_SAVE_AS }}" rel="bookmark" title="Permalink to archives">Archives</a>
+    <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ ARCHIVES_SAVE_AS }}" rel="bookmark" title="Permalink {{ 'to archives' | lookup_translation(DEFAULT_LANG) }}">{{ 'Archives' | lookup_translation(DEFAULT_LANG) }}</a>
   </h1>
 {% endblock %}
 

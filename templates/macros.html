@@ -1,7 +1,7 @@
 {% macro render_tag(tag) -%}
   <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ tag.url }}" data-toggle="tooltip"
       class="label label-default"
-      title="{{ tag.articles }} article{{ 's' if tag.articles > 1 else '' }} with this tag">{{ tag.name }}</a>
+      title="{{ tag.articles }} {{ ('article' 's' if article_counter > 1 else '') | lookup_translation(DEFAULT_LANG)}} {{ 'with this tag' | lookup_translation(DEFAULT_LANG) }}">{{ tag.name }}</a>
 {%- endmacro %}
 
 {% macro render_link_icon(link, label, favicon=True) -%}
