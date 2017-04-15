@@ -1,8 +1,8 @@
 {% macro translations_for(article) %}
   {% if article.translations %}
-    Translations:
+    {{ 'Translations' | lookup_translation(DEFAULT_LANG) }}:
     {% for translation in article.translations %}
-      <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ translation.url }}">{{ translation.lang }}</a>
+      <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ translation.url }}">{{ translation.lang | lookup_translation(DEFAULT_LANG) }}</a>
     {% endfor %}
   {% endif %}
 {% endmacro %}
