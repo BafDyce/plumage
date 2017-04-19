@@ -141,7 +141,7 @@
               {% for c, null in categories %}
                 {% set active_category = (c == category) -%}
                 <li {% if active_category %} class="active" {% endif %}>
-                  <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ c.url }}">{{ c.name }}{% if active_category %} <span class="sr-only">(current)</span>{% endif %}</a>
+                  <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ c.url }}">{{ c.name | lookup_translation(DEFAULT_LANG) }}{% if active_category %} <span class="sr-only">(current)</span>{% endif %}</a>
                 </li>
               {% endfor %}
             {% endif %}

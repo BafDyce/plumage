@@ -8,7 +8,7 @@
 
 {% block top_center %}
   <h1>
-    <a  href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ category.url }}" rel="bookmark" title="Permalink to {{ category|e }} articles">{{ category }} {{ 'articles' | lookup_translation(DEFAULT_LANG)}}</a>
+    <a  href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ category.url }}" rel="bookmark" title="Permalink to {{ category|e }} articles">{{ 'Articles' | lookup_translation(DEFAULT_LANG)}} in '{{ category.name | lookup_translation(DEFAULT_LANG) }}'</a>
   </h1>
 {% endblock %}
 
