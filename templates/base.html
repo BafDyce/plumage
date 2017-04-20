@@ -272,7 +272,7 @@
             {% if DISCLAIMER %}
               <p>{{ DISCLAIMER }}</p>
             {% else %}
-              <p>{{ 'All opinions expressed in this site are my own personal opinions and are not endorsed by, nor do they represent the opinions of my previous, current and future employers or any of its affiliates, partners or customers' | lookup_translation(DEFAULT_LANG) }}.</p>
+              <p>{{ 'disclaimer-text' | lookup_translation(DEFAULT_LANG) }}.</p>
             {% endif %}
           </div>
 
