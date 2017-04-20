@@ -1,3 +1,14 @@
+Note
+----
+
+This is a modified version of Plumage, as it is used on
+[my blog](https://uif-lab.eu/bafblox).  Right now you should not use this but
+rather use [the original](https://github.com/kdeldycke/plumage). When I find
+some time, I'll document the differences between the two versions, as well as
+make them more general, so that it's possible to merge some of the changes back.
+
+*The remainder of this readme is an untouched version of the original*
+
 Plumage
 =======
 
