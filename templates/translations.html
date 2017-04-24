@@ -4,5 +4,6 @@
     {% for translation in article.translations %}
       <a href="{{ SITEURL }}/{{ relpath_to_site(main_lang, main_lang) }}/{{ translation.url }}">{{ translation.lang | lookup_translation(DEFAULT_LANG) }}</a>
     {% endfor %}
+  <br><br>
   {% endif %}
 {% endmacro %}
