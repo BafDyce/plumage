@@ -5,43 +5,33 @@
 {%- endmacro %}
 
 {% macro render_link_icon(link, label, favicon=True) -%}
-  {% set icon = [] %}
   {% set favicon = False if favicon == False else True %}
   {% set protocol = link.split(':', 1)[0] %}
+  {% set ns = namespace(icon = '404.png') %}
+
   {% if protocol == 'mailto' %}
-    {% if icon.append('envelope') %}{% endif %}
+    {% set ns.icon = 'envelope.png' %}
   {% elif protocol.startswith('http') %}
     {% set domain = link.split('%s://' % protocol, 1)[1].split('/', 1)[0] %}
-    {% set SITE_ICONS = {
-          'apple': ['apple.com']
-        , 'github': ['github.com']
-        , 'twitter': ['twitter.com']
-        , 'youtube': ['youtube.com']
-        , 'dropbox': ['dropbox.com']
-        , 'facebook-square': ['facebook.com']
-        , 'file-text': ['docs.google.com']
-        , 'bitbucket': ['bitbucket.org', 'bitbucket.com']
-        , 'linkedin-square': ['linkedin.com']
-        , 'stack-overflow': ['stackoverflow.com']
-        , 'stack-exchange': ['stackexchange.com']
-        }
+    {# TODO: use original icon-finder logic using self-hosted besticon
+      (https://github.com/mat/besticon) #}
+    {% set SITE_FAVICONS_AVAILABLE = {
+        'getpelican.com': 'getpelican.com.ico',
+        'github.com': 'github.com.ico',
+        'gitlab.com': 'gitlab.com.png',
+        'python.org': 'python.org.ico'
+      }
     %}
-    {% for (site_icon, site_domains) in SITE_ICONS.items() %}
-      {% for site_domain in site_domains %}
-        {% if domain.startswith(site_domain) %}
-          {% if icon.append(site_icon) %}{% endif %}
-        {% endif %}
-      {% endfor %}
+
+    {% for (site_domain, site_favicon) in SITE_FAVICONS_AVAILABLE.items() %}
+      {% if domain.startswith(site_domain) %}
+        {% set ns.icon = site_favicon %}
+      {% endif %}
     {% endfor %}
   {% endif %}
+
   <a href="{{ link }}">
-    {% if icon %}
-      <i class="fa {{ 'fa-%s' % icon[0] }}"></i>
-    {% elif domain and favicon %}
-      <img src="https://icons.better-idea.org/icon?url={{ domain }}&size=16" width="16" height="16" class="icon" alt="{{ domain }} icon"/>
-    {% else %}
-      <i class="fa fa-external-link"></i>
-    {% endif %}
+    <img src="{{ SITEURL }}/theme/favicons/{{ ns.icon }}" width="16" height="16" class="icon" alt="{{ domain }} icon"/>
     {{ label }}
   </a>
 {%- endmacro %}
