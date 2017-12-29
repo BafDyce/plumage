@@ -107,6 +107,7 @@ The theme is also sensible to this list of [standard Pelican parameters
   * `FEED_ATOM`
   * `FEED_DOMAIN`
   * `FEED_RSS`
+  * `PAGINATION_PATTERNS`
   * `SITENAME`
   * `SITEURL`
   * `TAG_FEED_ATOM`
@@ -114,6 +115,28 @@ The theme is also sensible to this list of [standard Pelican parameters
   * `TAGS_SAVE_AS`
   * `TYPOGRIFY`
 
+
+### Common pitfalls
+
+Some plugins may need additional settings, for instance for **tipue_search**,
+after applying the standard options:
+
+```python
+PLUGINS = ['tipue_search']
+TIPUE_SEARCH = True
+```
+
+... you'll need to declare additional template file,
+by either adding this line to your `pelicanconf.py`:
+
+```python
+TEMPLATE_PAGES = {
+        'search.html': 'search.html',
+        }
+```
+
+
+or using [this technique](https://github.com/kdeldycke/kevin-deldycke-blog/commit/cd4bf8d1f4c55d835d7bfe1d7233cffe48e67a8a).
 
 FAQ
 ---
@@ -136,7 +159,7 @@ Changelog
 
 * [**1.0.dev**
   (unreleased)](https://github.com/kdeldycke/plumage/compare/0.9...master)
-  * No changes yet.
+  * Add proper support of `PAGINATION_PATTERNS` setting.
 
 * [**0.9**
   (2017-03-22)](https://github.com/kdeldycke/plumage/compare/0.8...0.9)
