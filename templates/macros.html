@@ -4,7 +4,7 @@
       title="{{ tag.articles }} {{ ('article' 's' if article_counter > 1 else '') | lookup_translation(DEFAULT_LANG)}} {{ 'with this tag' | lookup_translation(DEFAULT_LANG) }}">{{ tag.name }}</a>
 {%- endmacro %}
 
-{% macro render_link_icon(link, label, favicon=True) -%}
+{% macro render_link_icon(link, label, main_siteurl, favicon=True) -%}
   {% set favicon = False if favicon == False else True %}
   {% set protocol = link.split(':', 1)[0] %}
   {% set ns = namespace(icon = '404.png') %}
@@ -31,7 +31,7 @@
   {% endif %}
 
   <a href="{{ link }}">
-    <img src="{{ SITEURL }}/theme/favicons/{{ ns.icon }}" width="16" height="16" class="icon" alt="{{ domain }} icon"/>
+    <img src="{{ main_siteurl }}/theme/favicons/{{ ns.icon }}" width="16" height="16" class="icon" alt="{{ domain }} icon"/>
     {{ label }}
   </a>
 {%- endmacro %}

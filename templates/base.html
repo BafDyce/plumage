@@ -235,7 +235,7 @@
                 <h5>{{ group_title }}</h5>
                 <ul class="list-unstyled">
                 {% for title, link in group_links %}
-                  <li>{{ m.render_link_icon(link, title, FAVICON_LINKS) }}</li>
+                  <li>{{ m.render_link_icon(link, title, main_siteurl, FAVICON_LINKS) }}</li>
                 {% endfor %}
                 </ul>
               {% endif %}
